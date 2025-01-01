@@ -1,6 +1,8 @@
 import sys
 import io
+
 sys.set_int_max_str_digits(100000)
+
 def write_number(primes: [int], numtowrite: int):
         primefile = open("primes.txt", 'a')
         primes.append(numtowrite)
@@ -23,7 +25,6 @@ def primes_up_to(amaximum: int):
 	primefile.close()
 	try:
 		start = max(primes)
-		print(start)
 	except ValueError:
 		print("List is empty.")
 		start = 2
@@ -35,17 +36,28 @@ def primes_up_to(amaximum: int):
 				isprime = False
 				break
 		if isprime:
-			write_number(primes, i)	
-	print(primes)
+			write_number(primes, i)
+	print("Biggest prime found so far:", primes[-1])
+	print("Check the file primes.txt for all of them.")
 		
 
 if __name__ == '__main__':
-	print("Max Prime?")
-	done_in = False
-	while not done_in:
-		try:
-			maximum = int(input())
-			done_in = True
-		except ValueError as e:
-			print(e)
-		primes_up_to(maximum)
+        argfound = False
+        maxin = -1
+        if len(sys.argv) > 1:
+                try:
+                        maxin = int(sys.argv[1])
+                        argfound = True
+                except ValueError:
+                        print("I expect at most 1 arg: An int")
+
+        if maxin == -1:
+                print("Max Prime?")
+                done_in = False
+                while not done_in:
+                        try:
+                                maxin = int(input())  
+                                done_in = True
+                        except ValueError as e:
+                                print(e)
+        primes_up_to(maxin)
