@@ -1,2 +1,2 @@
 # Basic program to list primes
-I wrote it entirely on my phone this morning.
+I calculated EVERY prime number less than 1 million!
